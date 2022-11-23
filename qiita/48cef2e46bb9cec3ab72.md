@@ -1,0 +1,15 @@
+---
+title: twicli のショートカット追加
+tags: twicli
+author: hokorobi
+slide: false
+---
+# twicli のショートカット追加
+
+[twicliの夜フクロウ風ショートカットプラグインを作りました - oui-log](http://oui.hatenablog.com/entry/2015/03/16/221038) でいくつか便利なショートカットがあったので使わせてもらった。
+
+加えて、「ツイートのURLをツイート欄へコピー+フォーカスを移す」を c に割り当てた。
+リツイートした後に、それに対するコメントをする際に使っている。
+
+https://bitbucket.org/hokorobi/twicli/raw/4cb96b7b46b26f6c7451c60749585d2d67c271b9/plugins/shortcutkey.js
+
