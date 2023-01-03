@@ -1,0 +1,80 @@
+@startuml
+!theme toy
+
+start
+repeat :編集;
+if (変更箇所確認？ diff) then (yes)
+	split
+		-> チラッと;
+		:<Space>gd;
+	split again
+		-> じっくり;
+		:<Space>gD;
+		:qt (tabclose);
+	end split
+endif
+repeat while (編集継続？) is (yes) not (no)
+if (一行コメントですべてのファイルをコミット？) then (yes)
+	:<Space>gn;
+	:<コミットメッセージ記入>;
+	stop
+elseif (詳細コメントですべてのファイルをコミット？) then (yes)
+	:<Space>gN;
+	partition Vim {
+		:<コミットメッセージ記入>;
+		::wq;
+	}
+	stop
+endif
+repeat
+	if (一部のファイル全体をadd？) then (yes)
+		:<Space>gai;
+		:u;
+		:<対象のファイルの数字を入力 (ex: 1, 2)>;
+		:(数字を入力しない状態で)<Enter>;
+		:q;
+	elseif (ファイルの一部をadd？) then (yes)
+		:<Space>gad;
+		repeat
+			split
+				:y;
+			split again
+				:n;
+			split again
+				:a;
+			split again
+				:q;
+				(B)
+				detach
+			split again
+				:e;
+				partition Vim {
+					:行頭 - を ' ' に変更したり、行頭 + の行を削除したり。;
+					if (addやめる？) then (yes)
+						::cq;
+					else (no)
+						::wq;
+					endif
+				}
+			end split
+		repeat while (対象がまだある？) is (yes) not (no)
+		(B)
+	else (addを元に戻す？)
+		:<Space>gai;
+		:r;
+		:<対象のファイルの数字を入力 (ex: 1, 2)>;
+		:(数字を入力しない状態で)<Enter>;
+		:q;
+	endif
+	if (add内容確認？) then (yes)
+		:<Space>gs;
+	endif
+repeat while (add 継続？) is (yes) not (no)
+:<Space>gc;
+partition Vim {
+	:<コミットメッセージ記入>;
+	::wq;
+}
+
+stop
+@enduml
