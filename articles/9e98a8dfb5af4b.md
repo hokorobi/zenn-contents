@@ -15,7 +15,7 @@ https://github.com/christoomey/ctrlp-generic
 https://github.com/lambdalisue/gin.vim
 
 それぞれのプラグインを読み込んで、以下を vimrc に書きます。
-過去の内容を表示したいファイルを開いた状態で `<Space>gbo` を入力すると、で `git log` の結果が CtrlP で表示され、選択したコミット時点のファイルが vsplit で表示されます。
+過去の内容を表示したいファイルを開いた状態で `<Space>gbo` を入力すると、 `git log` の結果が CtrlP で表示され、選択したコミット時点のファイルが vsplit で表示されます。
 
 ```vim
 function! GinEditCallback(selected_value) abort
