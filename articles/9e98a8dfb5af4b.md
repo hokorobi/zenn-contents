@@ -27,3 +27,4 @@ endfunction
 nnoremap <Space>gbo <Cmd>call CtrlPGeneric(systemlist('git log --date=short --pretty=format:"%h %cd %s"'), 'GinEditCallback')<CR>
 ```
 
+https://www.youtube.com/watch?v=vpMkObFBd7o
