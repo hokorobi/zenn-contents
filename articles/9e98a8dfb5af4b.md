@@ -19,7 +19,6 @@ https://github.com/lambdalisue/gin.vim
 
 ```vim
 function! GinEditCallback(selected_value) abort
-  " call feedkeys(printf(";GinEdit ++opener=vsplit %s %%", matchstr(a:selected_value, '\w\+')))
   call matchstr(a:selected_value, '\w\+')
   \  ->printf(":GinEdit ++opener=vsplit %s %%")
   \  ->execute()
