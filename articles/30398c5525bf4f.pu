@@ -10,7 +10,8 @@ if (変更箇所確認？ diff) then (yes)
 	split again
 		-> じっくり;
 		:<Space>gD;
-		:qt (tabclose);
+		-> :tabclose;
+		:qt;
 	end split
 endif
 repeat while (編集継続？) is (yes) not (no)
@@ -30,26 +31,38 @@ repeat
 	if (一部のファイル全体をadd？) then (yes)
 		:<Space>gai;
 		:u;
-		:<対象のファイルの数字を入力 (ex: 1, 2)>;
-		:(数字を入力しない状態で)<Enter>;
+		-> 対象のファイルの数字を入力;
+		:(ex: 1, 2);
+		-> 確定;
+		:<Enter>;
 		:q;
 	elseif (ファイルの一部をadd？) then (yes)
 		:<Space>gad;
 		repeat
 			split
+				-> 変更箇所を add;
 				:y;
 			split again
+				-> 変更箇所をスキップ;
 				:n;
 			split again
+				-> - 変更箇所を add
+				- 同じファイルの
+				  以降の変更箇所も add;
 				:a;
 			split again
+				-> これ以降の
+				すべてのファイルの
+				変更箇所をスキップ;
 				:q;
 				(B)
 				detach
 			split again
+				-> 変更箇所の一部を add;
 				:e;
 				partition Vim {
-					:行頭 - を ' ' に変更したり、行頭 + の行を削除したり。;
+					:行頭 - を半角スペースに変更したり、
+					行頭 + の行を削除したり。;
 					if (addやめる？) then (yes)
 						::cq;
 					else (no)
@@ -59,17 +72,16 @@ repeat
 			end split
 		repeat while (対象がまだある？) is (yes) not (no)
 		(B)
-	else (addを元に戻す？)
-		:<Space>gai;
-		:r;
-		:<対象のファイルの数字を入力 (ex: 1, 2)>;
-		:(数字を入力しない状態で)<Enter>;
-		:q;
+	else (addを元に戻す)
+		:<Space>gS;
+		-> 対象のファイルに対して;
+		:>>;
+		::q;
 	endif
 	if (add内容確認？) then (yes)
 		:<Space>gs;
 	endif
-repeat while (add 継続？) is (yes) not (no)
+repeat while (commit?) is (no) not (yes)
 :<Space>gc;
 partition Vim {
 	:<コミットメッセージ記入>;
