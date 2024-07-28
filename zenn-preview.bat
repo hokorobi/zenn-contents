@@ -1,4 +1,4 @@
 cd %USERPROFILE%\Documents\zenn
-start npx zenn preview
+start deno run -A npm:zenn-cli@latest
 start http://localhost:8000/
 
