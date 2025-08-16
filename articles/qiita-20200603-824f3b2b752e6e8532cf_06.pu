@@ -1,0 +1,46 @@
+@startuml
+skinparam state {
+	BackgroundColor #Beige
+}
+
+state Normal1: IME OFF
+state "Normal" as Normal1
+
+state Insert2: IME OFF
+state "Insert" as Insert2
+
+state Insert3: IME ON
+state "Insert" as Insert3 #Lime
+
+state Normal4: IME OFF
+state "Normal" as Normal4
+
+state Cmdline5: IME OFF
+state "Cmdline" as Cmdline5 #text:Red
+
+state Cmdline6: IME ON
+state "Cmdline" as Cmdline6 #Lime
+
+state Normal7: IME OFF
+state "Normal" as Normal7
+
+state Cmdline8: IME OFF
+state "Cmdline" as Cmdline8 #text:Red
+
+state Normal9: IME OFF
+state "Normal" as Normal9
+
+state Insert10: IME ON
+state "Insert" as Insert10 #Lime;text:Red
+
+[*] -> Normal1
+Normal1 -> Insert2: i
+Insert2 --> Insert3 : <C-^>
+Insert3 -> Normal4 : ESC\nor\n<C-c>
+Normal4 -> Cmdline5 : :
+Cmdline5 --> Cmdline6 : <C-^>
+Cmdline6 -> Normal7 : ESC
+Normal7 -> Cmdline8 : :
+Cmdline8 -> Normal9 : ESC
+Normal9 -> Insert10 : i
+@enduml

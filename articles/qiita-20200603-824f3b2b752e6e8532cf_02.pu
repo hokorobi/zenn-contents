@@ -1,0 +1,22 @@
+@startuml
+skinparam state {
+	BackgroundColor #Beige
+}
+
+state Normal1: IME OFF
+state "Normal" as Normal1
+
+state Insert2: IME OFF
+state "Insert" as Insert2
+
+state Insert3: IME ON
+state "Insert" as Insert3 #Lime
+
+state Insert4: IME ON
+state "Insert" as Insert4 #Lime;text:Red
+
+[*] -> Normal1
+Normal1 -> Insert2: i
+Insert2 -> Insert3 : <C-^>
+Insert3 -> Insert4 : <CR>
+@enduml
