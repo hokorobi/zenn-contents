@@ -29,13 +29,20 @@ elseif (詳細コメントですべてのファイルをコミット？) then (y
 endif
 repeat
 	if (一部のファイル全体をadd？) then (yes)
-		:<Space>gai;
-		:u;
-		-> 対象のファイルの数字を入力;
-		:(ex: 1, 2);
-		-> 確定;
-		:<Enter>;
+		if (gin.vim を使う？) then (yes)
+			:<Space>gS;
+			-> 対象のファイルに対して;
+			:<<;
+			:<C-o>;
+		else
+			:<Space>gai;
+			:u;
+			-> 対象のファイルの数字を入力;
+			:(ex: 1, 2);
+			-> 確定;
+			:<Enter>;
 		:q;
+		endif
 	elseif (ファイルの一部をadd？) then (yes)
 		:<Space>gad;
 		repeat
@@ -76,7 +83,7 @@ repeat
 		:<Space>gS;
 		-> 対象のファイルに対して;
 		:>>;
-		::q;
+		:<C-o>;
 	endif
 	if (add内容確認？) then (yes)
 		:<Space>gs;
